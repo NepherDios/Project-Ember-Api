@@ -8,7 +8,7 @@ from crud.item import (
     get_item,
 )
 
-router = APIRouter(prefix="/item", tags=["item"])
+router = APIRouter(prefix="/items", tags=["item"])
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def insert_item(data: ItemCreate, db: Session = Depends(get_db)):

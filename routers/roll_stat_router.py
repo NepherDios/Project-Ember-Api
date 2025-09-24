@@ -5,7 +5,7 @@ from database import get_db
 from schemas.roll_stat import RollStatCreate
 from crud.roll_stat import create_roll_stat, get_roll_stat
 
-router = APIRouter(prefix="/roll_stat", tags=["roll_stat"])
+router = APIRouter(prefix="/roll_stats", tags=["roll_stat"])
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def insert_roll_stat(data: RollStatCreate, db: Session = Depends(get_db)):

@@ -19,7 +19,7 @@ from crud.inventory import (
     remove_from_inventory,
 )
 
-router = APIRouter(prefix="/inventory", tags=["inventory"])
+router = APIRouter(prefix="/inventories", tags=["inventory"])
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED)

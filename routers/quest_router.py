@@ -5,7 +5,7 @@ from database import get_db
 from schemas.quest import QuestCreate, QuestUpdate
 from crud.quest import create_quest, update_quest, get_quest, get_all_quests, delete_quest, delete_all_quests
 
-router = APIRouter(prefix="/quest", tags=["quest"])
+router = APIRouter(prefix="/quests", tags=["quest"])
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def insert_quest(data: QuestCreate, db: Session = Depends(get_db)):

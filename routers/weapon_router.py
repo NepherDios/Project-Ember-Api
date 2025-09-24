@@ -5,7 +5,7 @@ from database import get_db
 from schemas.weapon import WeaponCreate, WeaponUpdate
 from crud.weapon import create_weapon, update_weapon, get_weapon
 
-router = APIRouter(prefix="/weapon", tags=["weapon"])
+router = APIRouter(prefix="/weapons", tags=["weapon"])
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def insert_weapon(data: WeaponCreate, db: Session = Depends(get_db)):

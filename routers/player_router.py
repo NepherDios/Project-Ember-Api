@@ -11,7 +11,7 @@ from crud.player import (
     delete_player,
 )
 
-router = APIRouter(prefix="/player", tags=["player"])
+router = APIRouter(prefix="/players", tags=["players"])
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 def insert_player(data: PlayerCreate, db: Session = Depends(get_db)):
