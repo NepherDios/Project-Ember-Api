@@ -9,7 +9,7 @@ class RollType(enum.Enum):
     MAX_MANA = "MaxMana"
     MANA_REGEN = "ManaRegen"
     MAX_ARMOR = "MaxArmor"
-    ARMOR_REGEN_MULTIPLIER = "ArmorRegenMultiplier"
+    ARMOR_REGEN_RATE_MULTIPLIER = "ArmorRegenRateMultiplier"
     ARMOR_THRESHOLD_MULTIPLIER = "ArmorThresholdMultiplier"
     CRIT_CHANCE = "CritChance"
     CRIT_MULTIPLIER = "CritMultiplier"
