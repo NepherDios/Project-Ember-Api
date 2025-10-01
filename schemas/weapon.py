@@ -6,7 +6,7 @@ from enums.equipment_placement import EquipmentPlacement
 
 class WeaponCreate(BaseModel):
     weapon_type: WeaponType
-    weapon_placement: EquipmentPlacement #Where it can be placed(Main-hand or Off-hand)
+    weapon_placement: EquipmentPlacement
     weapon_dmg: int
     dmg_type: DmgType
     item_id: int

@@ -2,10 +2,12 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlalchemy.orm import Session
 from database import get_db
-from schemas.item import ItemCreate
+from models.item import Item
+from schemas.item import ItemCreate, ItemUpdate
 from crud.item import (
     create_item,
     get_item,
+    update_item,
 )
 
 router = APIRouter(prefix="/items", tags=["item"])
@@ -21,6 +23,19 @@ def insert_item(data: ItemCreate, db: Session = Depends(get_db)):
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
     return new_item
+
+@router.put("/{item_id}", status_code=status.HTTP_200_OK)
+def update_item_data(item_id: int, updated_data: ItemUpdate, db: Session = Depends(get_db)) -> Item:
+    try:
+        item = update_item(db, item_id, updated_data)
+    except SQLAlchemyError as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
+    
+    if not item:
+        raise HTTPException(status_code=404, detail="Item not found")
+    
+    return item
 
 @router.get("/{item_id}", status_code=status.HTTP_200_OK)
 def read_item(item_id: int, db: Session = Depends(get_db)):

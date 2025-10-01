@@ -8,11 +8,16 @@ class ItemCreate(BaseModel):
     item_name: str
     common_attr_id: Optional[int] = None
 
+class ItemUpdate(BaseModel):
+    item_name: Optional[str]
+    item_type: Optional[ItemType]
+    common_attr_id: Optional[int]
+
 class ItemResponse(BaseModel):
     item_id: int
     item_name: str
     item_type: ItemType
-    common_attr_id: Optional[int] = None
+    common_attr_id: Optional[int] = None  
 
 class ItemDetailsWithCommonAttr(BaseModel):
     item_id: int

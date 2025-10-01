@@ -5,10 +5,10 @@ from typing import Optional
 class PlayerCreate(BaseModel):
     player_name: str
     player_class: PlayerClass
-    souls: int = 0
-    gold: int = 0
-    level: int = 1
-    current_xp: int = 0
+    souls: Optional[int] = 0
+    gold: Optional[int] = 0
+    level: Optional[int] = 1
+    current_xp: Optional[int] = 0
     
 class PlayerUpdate(BaseModel):
     player_name: Optional[str]

@@ -12,7 +12,7 @@ class ArmoryEnchantmentUpdate(BaseModel):
     rolled_value_2: Optional[float]
 
 class ArmoryEnchantmentResponse(BaseModel):
-    roll_stat_id: int
     item_id: int
+    roll_stat_id: int
     rolled_value_1: float
     rolled_value_2: float

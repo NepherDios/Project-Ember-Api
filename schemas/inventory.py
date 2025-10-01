@@ -6,7 +6,7 @@ from schemas.item import ItemDetailsWithCommonAttr
 class InventoryCreate(BaseModel):
     player_id: int
     slot_id: int
-    item_id: int
+    item_id: Optional[int]
 
 class InventoryUpdate(BaseModel):
     item_id: int
@@ -26,7 +26,7 @@ class InventoryResponse(BaseModel):
     
 class ItemDetails(BaseModel):
     item_id: int
-    item_name: Optional[str] = None
+    item_name: str
     item_type: ItemType
 
     model_config = {
@@ -44,7 +44,7 @@ class InventoryItemWithDetails(BaseModel):
 class InventoryWithDetailsResponse(BaseModel):
     items: list[InventoryItemWithDetails]
 
-class InventoryItemWithCommonAttr(BaseModel):
+class InventoryItemWithDetailsAndStats(BaseModel):
     slot_id: int
     item: ItemDetailsWithCommonAttr
 
@@ -52,5 +52,5 @@ class InventoryItemWithCommonAttr(BaseModel):
         "from_attributes": True
     }
 
-class InventoryWithCommonAttrResponse(BaseModel):
-    items: list[InventoryItemWithCommonAttr]
+class InventoryWithDetailsAndStatsResponse(BaseModel):
+    items: list[InventoryItemWithDetailsAndStats]

@@ -8,7 +8,7 @@ from schemas.inventory import (
     InventoryResponse,
     InventoryItemWithDetails,
     InventoryWithDetailsResponse,
-    InventoryWithCommonAttrResponse,
+    InventoryWithDetailsAndStatsResponse,
 )
 from crud.inventory import (
     add_item_to_inventory,
@@ -46,7 +46,7 @@ def update_inventory(player_id: int, updated_data: InventoryUpdate, db: Session 
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
     
-    if inv_rows is None:
+    if not inv_rows:
         raise HTTPException(status_code=404, detail="Inventory not found")
     return {"items" : inv_rows}
 
@@ -80,7 +80,7 @@ def read_player_items(player_id: int, db: Session = Depends(get_db)):
 
 
 
-@router.get("/items/details/{player_id}", response_model=InventoryWithCommonAttrResponse)
+@router.get("/items/details/{player_id}", response_model=InventoryWithDetailsAndStatsResponse)
 def read_player_items_with_details(player_id: int, db: Session = Depends(get_db)):
     items = get_inventory_items_with_details(db, player_id)
     if not items:
