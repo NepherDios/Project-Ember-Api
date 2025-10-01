@@ -6,7 +6,7 @@ class ProgressCreate(BaseModel):
     player_id: int
     stage_id: int
     current_biome: Biome
-    stage_difficulty: Optional[int] = None
+    stage_difficulty: Optional[int] = None # if not yet started ;D
     stage_best_score: Optional[int] = 0
     
 class ProgressUpdate(BaseModel):

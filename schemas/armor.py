@@ -4,14 +4,15 @@ from enums.equipment_placement import EquipmentPlacement
 from typing import Optional
 
 class ArmorCreate(BaseModel):
+    item_id: int
     armor_type: ArmorType
     armor_placement: EquipmentPlacement
     max_armor: int
     armor_regen: Optional[float] = None
     armor_threshold: int
-    item_id: int
 
 class ArmorUpdate(BaseModel):
+    armor_type: Optional[ArmorType]
     armor_placement: Optional[EquipmentPlacement]
     max_armor: Optional[int]
     armor_regen: Optional[float]
@@ -19,9 +20,9 @@ class ArmorUpdate(BaseModel):
 
 class ArmorResponse(BaseModel):
     armor_id: int
+    item_id: int
     armor_type: ArmorType
     armor_placement: EquipmentPlacement
     max_armor: int
     armor_regen: Optional[float] = None
     armor_threshold: int
-    item_id: int

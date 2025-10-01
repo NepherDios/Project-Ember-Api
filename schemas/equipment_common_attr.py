@@ -22,7 +22,7 @@ class EquipmentCommonAttrResponse(BaseModel):
     sell_price: Optional[int] = None
     rarity: RarityType
     equipment_tier: int
-    equipped: Optional[bool] = None
+    equipped: bool
     
     model_config = {
         "from_attributes": True

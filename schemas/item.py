@@ -21,7 +21,7 @@ class ItemResponse(BaseModel):
 
 class ItemDetailsWithCommonAttr(BaseModel):
     item_id: int
-    item_name: Optional[str] = None
+    item_name: str
     item_type: ItemType
     common_attr: Optional[EquipmentCommonAttrResponse] = None
 
