@@ -12,6 +12,7 @@ class Ability(Base):
     ability_slot = Column(Integer)
     
     player = relationship('Player', back_populates='ability')
+    
     __table_args__ = (
         UniqueConstraint('player_id', 'ability_key', name='uq_player_ability_key'),
         UniqueConstraint('player_id', 'ability_name', name='uq_player_ability_name'),

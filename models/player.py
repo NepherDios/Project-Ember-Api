@@ -19,3 +19,5 @@ class Player(Base):
     ability = relationship('Ability', back_populates='player', cascade="all, delete-orphan")
     progress = relationship('Progress', back_populates='player', cascade="all, delete-orphan")
     quest_progress = relationship('QuestProgress', back_populates='player', cascade="all, delete-orphan")
+    skill_tree = relationship('SkillTree', back_populates='player', cascade = "all, delete-orphan")
+    player_saves = relationship('PlayerSave', back_populates='player', cascade="all, delete-orphan")
