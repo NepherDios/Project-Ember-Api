@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import Optional
 
 class QuestProgressCreate(BaseModel):
     player_id: int
@@ -18,4 +18,4 @@ class QuestProgressResponse(BaseModel):
         orm_mode = True
     
 class QuestProgressListResponse(BaseModel):
-    quests_progress_list: List[QuestProgressResponse]
+    quests_progress_list: list[QuestProgressResponse]

@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from enums.player_class import PlayerClass
-from typing import Optional, List
+from typing import Optional
 
 class PlayerCreate(BaseModel):
     player_name: str
@@ -31,4 +31,4 @@ class PlayerResponse(BaseModel):
         orm_mode = True 
     
 class PlayersListResponse(BaseModel):
-    players_list: List[PlayerResponse]
+    players_list: list[PlayerResponse]
