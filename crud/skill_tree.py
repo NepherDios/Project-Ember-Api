@@ -13,8 +13,7 @@ def create_skill_tree(session: Session, data: CreateSkillTree) -> SkillTree:
     
     return skill_tree
 
-def get_skill_trees(session: Session, player_id: int) -> List[SkillTree]:
-    # Return all skill trees for a player
+def get_player_skill_trees(session: Session, player_id: int) -> List[SkillTree]:
     return session.query(SkillTree).filter(SkillTree.player_id == player_id).all()
 
 def update_skill_tree(session: Session, skill_tree_id: int, updated_data: UpdateSkillTree) -> Optional[SkillTree]:

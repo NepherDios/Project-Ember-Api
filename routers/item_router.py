@@ -3,7 +3,7 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from sqlalchemy.orm import Session
 from database import get_db
 from models.item import Item
-from schemas.item import ItemCreate, ItemUpdate
+from schemas.item import ItemCreate, ItemUpdate, ItemResponse
 from crud.item import (
     create_item,
     get_item,
@@ -13,7 +13,7 @@ from crud.item import (
 router = APIRouter(prefix="/items", tags=["item"])
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
-def insert_item(data: ItemCreate, db: Session = Depends(get_db)) -> Item | None:
+def insert_item(data: ItemCreate, db: Session = Depends(get_db)):
     try:
         new_item = create_item(db, data)
     except IntegrityError as e:
@@ -24,8 +24,8 @@ def insert_item(data: ItemCreate, db: Session = Depends(get_db)) -> Item | None:
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
     return new_item
 
-@router.put("/{item_id}", status_code=status.HTTP_200_OK)
-def update_item_data(item_id: int, updated_data: ItemUpdate, db: Session = Depends(get_db)) -> Item | None:
+@router.put("/{item_id}", status_code=status.HTTP_200_OK, response_model=ItemResponse)
+def update_item_data(item_id: int, updated_data: ItemUpdate, db: Session = Depends(get_db)):
     try:
         item = update_item(db, item_id, updated_data)
     except SQLAlchemyError as e:
@@ -37,7 +37,7 @@ def update_item_data(item_id: int, updated_data: ItemUpdate, db: Session = Depen
     
     return item
 
-@router.get("/{item_id}", status_code=status.HTTP_200_OK)
+@router.get("/{item_id}", status_code=status.HTTP_200_OK, response_model=ItemResponse)
 def read_item(item_id: int, db: Session = Depends(get_db)):
     try:
         item = get_item(db, item_id)

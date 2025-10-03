@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from database import get_db
-from schemas.weapon import WeaponCreate, WeaponUpdate
+from schemas.weapon import WeaponCreate, WeaponUpdate, WeaponResponse
 from crud.weapon import create_weapon, update_weapon, get_weapon
 
 router = APIRouter(prefix="/weapons", tags=["weapon"])
@@ -30,7 +30,7 @@ def modify_weapon(weapon_id: int, updated_data: WeaponUpdate, db: Session = Depe
         raise HTTPException(status_code=404, detail="Weapon not found")
     return weapon
 
-@router.get("/{weapon_id}", status_code=status.HTTP_200_OK)
+@router.get("/{weapon_id}", status_code=status.HTTP_200_OK, response_model=WeaponResponse)
 def read_weapon(weapon_id: int, db: Session = Depends(get_db)):
     try:
         weapon = get_weapon(db, weapon_id)

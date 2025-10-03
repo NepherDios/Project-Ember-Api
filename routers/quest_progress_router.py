@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from database import get_db
-from schemas.quest_progress import QuestProgressCreate, QuestProgressUpdate
+from schemas.quest_progress import QuestProgressCreate, QuestProgressUpdate, QuestProgressResponse, QuestProgressListResponse
 from crud.quest_progress import (
     create_player_quest_progress,
     update_player_quest_progress,
@@ -35,7 +35,7 @@ def modify_quest_progress(player_id: int, updated_data: QuestProgressUpdate, db:
         raise HTTPException(status_code=404, detail="Quest progress not found")
     return progress
 
-@router.get("/{player_id}/{quest_id}", status_code=status.HTTP_200_OK)
+@router.get("/{player_id}/{quest_id}", status_code=status.HTTP_200_OK, response_model=QuestProgressResponse)
 def read_quest_progress(player_id: int, quest_id: int, db: Session = Depends(get_db)):
     try:
         progress = get_player_quest_progress(db, player_id, quest_id)
@@ -46,7 +46,7 @@ def read_quest_progress(player_id: int, quest_id: int, db: Session = Depends(get
         raise HTTPException(status_code=404, detail="Quest progress not found")
     return progress
 
-@router.get("/{player_id}", status_code=status.HTTP_200_OK)
+@router.get("/{player_id}", status_code=status.HTTP_200_OK, response_model=QuestProgressListResponse)
 def read_all_quest_progress(player_id: int, db: Session = Depends(get_db)):
     try:
         progress_list = get_all_player_quest_progress(db, player_id)

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from database import get_db
-from schemas.progress import ProgressCreate, ProgressUpdate
+from schemas.progress import ProgressCreate, ProgressUpdate, ProgressResponse
 from crud.progress import (
     create_player_progress,
     update_player_progress,
@@ -39,7 +39,7 @@ def update_progress(player_id: int, stage_id: int, updated_data: ProgressUpdate,
         raise HTTPException(status_code=404, detail="Progress not found")
     return progress
 
-@router.get("/{player_id}", status_code=status.HTTP_200_OK)
+@router.get("/{player_id}", status_code=status.HTTP_200_OK, response_model=ProgressResponse)
 def read_player_progress(player_id: int, db: Session = Depends(get_db)):
     try:
         progress_list = get_player_progress(db, player_id)

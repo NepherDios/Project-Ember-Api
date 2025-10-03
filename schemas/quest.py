@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 from pydantic import BaseModel
 
 class QuestCreate(BaseModel):
@@ -19,3 +19,9 @@ class QuestResponse(BaseModel):
     description: str
     target: int
     location: Optional[str] = None
+    
+    class Config:
+        orm_mode = True
+
+class QuestListResponse(BaseModel):
+    quest = List[QuestResponse]

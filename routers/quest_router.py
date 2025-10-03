@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from database import get_db
-from schemas.quest import QuestCreate, QuestUpdate
+from schemas.quest import QuestCreate, QuestUpdate, QuestResponse, QuestListResponse
 from crud.quest import create_quest, update_quest, get_quest, get_all_quests, delete_quest, delete_all_quests
 
 router = APIRouter(prefix="/quests", tags=["quest"])
@@ -30,7 +30,7 @@ def modify_quest(quest_id: int, updated_data: QuestUpdate, db: Session = Depends
         raise HTTPException(status_code=404, detail="Quest not found")
     return quest
 
-@router.get("/{quest_id}", status_code=status.HTTP_200_OK)
+@router.get("/{quest_id}", status_code=status.HTTP_200_OK, response_model=QuestResponse)
 def read_quest(quest_id: int, db: Session = Depends(get_db)):
     try:
         quest = get_quest(db, quest_id)
@@ -41,7 +41,7 @@ def read_quest(quest_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Quest not found")
     return quest
 
-@router.get("/", status_code=status.HTTP_200_OK)
+@router.get("/", status_code=status.HTTP_200_OK, response_model=QuestListResponse)
 def read_all_quests(db: Session = Depends(get_db)):
     try:
         quests = get_all_quests(db)
