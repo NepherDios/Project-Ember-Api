@@ -24,4 +24,4 @@ class QuestResponse(BaseModel):
         orm_mode = True
 
 class QuestListResponse(BaseModel):
-    quest = List[QuestResponse]
+    quest: List[QuestResponse]
