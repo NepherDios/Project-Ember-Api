@@ -3,7 +3,7 @@ from schemas.armory_enchantment import ArmoryEnchantmentCreate, ArmoryEnchantmen
 from sqlalchemy.orm import Session
 
 def create_armory_enchantment(session: Session, data: ArmoryEnchantmentCreate) -> ArmoryEnchantment:
-    armory_enchantment = ArmoryEnchantment(**data.model_dump())
+    armory_enchantment = ArmoryEnchantment(**data.dict())
     
     session.add(armory_enchantment)
     session.commit()
@@ -18,7 +18,7 @@ def update_armory_enchantment(session: Session, item_id: int, roll_stat_id: int,
     if not armory_enchantment:
         return None
     
-    for key, value in updated_data.model_dump(exclude_unset=True).items():
+    for key, value in updated_data.dict(exclude_unset=True).items():
         setattr(armory_enchantment, key, value)
         
     session.commit()

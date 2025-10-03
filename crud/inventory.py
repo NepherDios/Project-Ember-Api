@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 
 #Adds an item to the inventory after common_attr -> item -> weapon/armor/accessory/general_item have been created and it's slot_id defined
 def add_item_to_inventory(session: Session, data: InventoryCreate) -> Inventory:
-    inv_row = Inventory(**data.model_dump())
+    inv_row = Inventory(**data.dict())
     
     session.add(inv_row)
     session.commit()
@@ -22,7 +22,7 @@ def update_inventory_slots(session: Session, player_id: int, updated_data: Inven
     if not inv_rows:
         return None
     
-    for slot_id, new_item_id in updated_data.model_dump(exclude_unset=True).items():
+    for slot_id, new_item_id in updated_data.dict(exclude_unset=True).items():
         for inv_row in inv_rows:
             if inv_row.slot_id == slot_id:
                 inv_row.item_id = new_item_id

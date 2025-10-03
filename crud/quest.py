@@ -3,7 +3,7 @@ from schemas.quest import QuestCreate, QuestUpdate
 from sqlalchemy.orm import Session
 
 def create_quest(session: Session, data: QuestCreate) -> Quest:
-    quest = Quest(**data.model_dump())
+    quest = Quest(**data.dict())
     
     session.add(quest)
     session.commit()
@@ -18,7 +18,7 @@ def update_quest(session: Session, quest_id: int, updated_data: QuestUpdate) -> 
     if not quest:
         return None
     
-    for key, value in updated_data.model_dump(exclude_unset=True).items():
+    for key, value in updated_data.dict(exclude_unset=True).items():
         setattr(quest, key, value)
         
     session.commit()

@@ -3,7 +3,7 @@ from schemas.roll_stat import RollStatCreate
 from sqlalchemy.orm import Session
 
 def create_roll_stat(session: Session, data: RollStatCreate) -> RollStat:
-    roll_stat = RollStat(**data.model_dump())
+    roll_stat = RollStat(**data.dict())
     
     session.add(roll_stat)
     session.commit()

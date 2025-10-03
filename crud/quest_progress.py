@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 #Creates the player quest progress once initiated
 def create_player_quest_progress(session: Session, data: QuestProgressCreate) -> QuestProgress:
-    quest_progress = QuestProgress(**data.model_dump())
+    quest_progress = QuestProgress(**data.dict())
     
     session.add(quest_progress)
     session.commit()
@@ -18,7 +18,7 @@ def update_player_quest_progress(session: Session, player_id: int, updated_data:
     if not quest_progress:
         return None
     
-    for key, value in updated_data.model_dump(exclude_unset=True).items():
+    for key, value in updated_data.dict(exclude_unset=True).items():
         setattr(quest_progress, key, value)
         
     session.commit()

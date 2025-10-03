@@ -3,7 +3,7 @@ from schemas.equipment_common_attr import EquipmentCommonAttrCreate, EquipmentCo
 from sqlalchemy.orm import Session
 
 def create_equipment_common_attr(session: Session, data: EquipmentCommonAttrCreate) -> EquipmentCommonAttr:
-    common_attr = EquipmentCommonAttr(**data.model_dump())
+    common_attr = EquipmentCommonAttr(**data.dict())
     session.add(common_attr)
     session.commit()
     session.refresh(common_attr)
@@ -17,7 +17,7 @@ def update_equipment_common_attr(session: Session, common_attr_id: int, updated_
     if not common_attr:
         return None
     
-    for key, value in updated_data.model_dump(exclude_unset=True).items():
+    for key, value in updated_data.dict(exclude_unset=True).items():
         setattr(common_attr, key, value)
     
     session.commit()

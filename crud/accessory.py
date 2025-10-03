@@ -3,7 +3,7 @@ from schemas.accessory import AccessoryCreate
 from sqlalchemy.orm import Session
 
 def create_accessory(session: Session, data: AccessoryCreate) -> Accessory:
-    accessory = Accessory(**data.model_dump())
+    accessory = Accessory(**data.dict())
     
     session.add(accessory)
     session.commit()

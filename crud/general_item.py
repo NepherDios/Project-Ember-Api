@@ -3,7 +3,7 @@ from schemas.general_item import GeneralItemCreate
 from sqlalchemy.orm import Session
 
 def create_general_item(session: Session, data: GeneralItemCreate) -> GeneralItem:
-    general_item = GeneralItem(**data.model_dump())
+    general_item = GeneralItem(**data.dict())
     
     session.add(general_item)
     session.commit()

@@ -3,7 +3,7 @@ from schemas.armor import ArmorCreate, ArmorUpdate
 from sqlalchemy.orm import Session
 
 def create_armor(session: Session, data: ArmorCreate) -> Armor:
-    armor = Armor(**data.model_dump())
+    armor = Armor(**data.dict())
     
     session.add(armor)
     session.commit()
@@ -17,7 +17,7 @@ def update_armor(session: Session, armor_id: int, updated_data: ArmorUpdate) -> 
     if not armor:
         return None
     
-    for key, value in updated_data.model_dump(exclude_unset=True).items():
+    for key, value in updated_data.dict(exclude_unset=True).items():
         setattr(armor, key, value)
         
     session.commit()

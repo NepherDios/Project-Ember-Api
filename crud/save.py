@@ -3,7 +3,7 @@ from models.save import Save
 from schemas.saves import CreateSave, SaveResponse, UpdateSave
 
 def create_save(session: Session, data: CreateSave) -> Save | None:
-    save = Save(**data)
+    save = Save(**data.dict())
     
     session.add(save)
     session.commit()
@@ -22,7 +22,7 @@ def update_saves(session: Session, player_id: int, save_slot: int, updated_data:
     if not save:
         return None
     
-    for key, value in updated_data.model_dump(exclude_unset=True).items():
+    for key, value in updated_data.dict(exclude_unset=True).items():
         setattr(save, key, value)
         
     session.commit()

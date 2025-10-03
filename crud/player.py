@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 
 def create_player(session: Session, data: PlayerCreate) -> Player:
-    player = Player(**data.model_dump())
+    player = Player(**data.dict())
     
     session.add(player)
     session.commit()
@@ -19,7 +19,7 @@ def update_player(session: Session, player_id: int, updated_data: PlayerUpdate) 
     if not player:
         return None
     
-    for key, value in updated_data.model_dump(exclude_unset=True).items():
+    for key, value in updated_data.dict(exclude_unset=True).items():
         setattr(player, key, value)
         
     session.commit()

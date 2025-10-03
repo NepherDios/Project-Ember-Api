@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 #Creates stage information when the players enter a new stage(finishes the previous one :P)
 def create_player_progress(session: Session, data: ProgressCreate) -> Progress:
-    progress = Progress(**data.model_dump())
+    progress = Progress(**data.dict())
     
     session.add(progress)
     session.commit()
@@ -19,7 +19,7 @@ def update_player_progress(session: Session, player_id: int, stage_id: int, upda
     if not progress:
         return None
     
-    for key, value in updated_data.model_dump(exclude_unset=True).items():
+    for key, value in updated_data.dict(exclude_unset=True).items():
         setattr(progress, key, value)
         
     session.commit()

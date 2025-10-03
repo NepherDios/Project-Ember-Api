@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 #Creates an ability when the player is created or gets a new skill
 #Or recreates the ability if the player resets the skill tree(If implemented)
 def create_ability(session: Session, data: AbilityCreate) -> Ability:
-    ability = Ability(**data.model_dump())
+    ability = Ability(**data.dict())
     
     session.add(ability)
     session.commit()
@@ -20,7 +20,7 @@ def update_ability(session: Session, ability_id: int, updated_data: AbilityUpdat
     if not ability:
         return None
     
-    for key, value in updated_data.model_dump(exclude_unset=True).items():
+    for key, value in updated_data.dict(exclude_unset=True).items():
         setattr(ability, key, value)
     
     session.commit()

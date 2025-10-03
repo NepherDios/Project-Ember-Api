@@ -5,7 +5,7 @@ from typing import List, Optional
 
 def create_skill_tree(session: Session, data: CreateSkillTree) -> SkillTree:
     # Use .dict() to convert Pydantic model to dict
-    skill_tree = SkillTree(**data.model_dump())
+    skill_tree = SkillTree(**data.dict())
     
     session.add(skill_tree)
     session.commit()
@@ -22,7 +22,7 @@ def update_skill_tree(session: Session, skill_tree_id: int, updated_data: Update
     if not skill_tree:
         return None
     
-    for key, value in updated_data.model_dump(exclude_unset=True).items():
+    for key, value in updated_data.dict(exclude_unset=True).items():
         setattr(skill_tree, key, value)
         
     session.commit()

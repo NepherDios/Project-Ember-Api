@@ -3,7 +3,7 @@ from schemas.item import ItemCreate, ItemUpdate
 from sqlalchemy.orm import Session
 
 def create_item(session: Session, data: ItemCreate) -> Item:
-    item = Item(**data.model_dump())
+    item = Item(**data.dict())
     
     session.add(item)
     session.commit()
@@ -22,7 +22,7 @@ def update_item(session: Session, item_id: int, updated_data: ItemUpdate) -> Ite
     if not item:
         return None
     else:
-        for key, value in updated_data.model_dump(exclude_unset=True).items():
+        for key, value in updated_data.dict(exclude_unset=True).items():
             setattr(item, key, value)
 
     session.commit()

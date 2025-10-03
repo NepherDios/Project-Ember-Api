@@ -3,7 +3,7 @@ from schemas.weapon import WeaponCreate, WeaponUpdate
 from sqlalchemy.orm import Session
 
 def create_weapon(session: Session, data: WeaponCreate) -> Weapon:
-    weapon = Weapon(**data.model_dump())
+    weapon = Weapon(**data.dict())
     
     session.add(weapon)
     session.commit()
@@ -17,7 +17,7 @@ def update_weapon(session: Session, weapon_id: int, updated_data: WeaponUpdate) 
     if not weapon:
         return None
     
-    for key, value in updated_data.model_dump(exclude_unset=True).items():
+    for key, value in updated_data.dict(exclude_unset=True).items():
         setattr(weapon, key, value)
         
     session.commit()
