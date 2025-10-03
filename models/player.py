@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Enum
 from sqlalchemy.orm import relationship
 from database import Base
-from save import PlayerSave
+from models.save import PlayerSave
 
 from enums.player_class import PlayerClass
 
