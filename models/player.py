@@ -1,8 +1,6 @@
 from sqlalchemy import Column, Integer, String, Enum
 from sqlalchemy.orm import relationship
 from database import Base
-from models.save import PlayerSave
-
 from enums.player_class import PlayerClass
 
 class Player(Base):
