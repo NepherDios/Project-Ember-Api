@@ -44,7 +44,7 @@ app.include_router(skill_tree_router.router)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # replace "*" with your Unity app origin in production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
