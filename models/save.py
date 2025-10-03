@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, ForeignKey,SmallInteger, UniqueConstrain
 from sqlalchemy.orm import relationship
 from database import Base
 
-class Save(Base):
+class PlayerSave(Base):
     __tablename__ = "saves"
     
     save_id = Column(Integer, primary_key=True, index=True)
