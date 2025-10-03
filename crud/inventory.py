@@ -1,5 +1,5 @@
 from models.inventory import Inventory
-from schemas.inventory import InventoryCreate, InventoryUpdate, InventoryItemWithCommonAttr, ItemDetails, InventoryItemWithDetails
+from schemas.inventory import InventoryCreate, InventoryUpdate, InventoryItemWithDetailsAndStats, ItemDetails, InventoryItemWithDetails
 from schemas.item import ItemDetailsWithCommonAttr
 from schemas.equipment_common_attr import EquipmentCommonAttrResponse
 from models.item import ItemType
@@ -83,7 +83,7 @@ def get_inventory_items_with_details(session: Session, player_id: int):
         )
 
         detailed_items.append(
-            InventoryItemWithCommonAttr(
+            InventoryItemWithDetailsAndStats(
                 slot_id=inv.slot_id,
                 item=detailed_item,
             )
