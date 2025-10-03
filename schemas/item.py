@@ -25,6 +25,5 @@ class ItemDetailsWithCommonAttr(BaseModel):
     item_type: ItemType
     common_attr: Optional[EquipmentCommonAttrResponse] = None
 
-    model_config = {
-        "from_attributes": True
-    }
+    class Config:
+        orm_mode = True

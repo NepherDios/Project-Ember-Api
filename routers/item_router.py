@@ -13,7 +13,7 @@ from crud.item import (
 router = APIRouter(prefix="/items", tags=["item"])
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
-def insert_item(data: ItemCreate, db: Session = Depends(get_db)):
+def insert_item(data: ItemCreate, db: Session = Depends(get_db)) -> Item | None:
     try:
         new_item = create_item(db, data)
     except IntegrityError as e:
@@ -25,7 +25,7 @@ def insert_item(data: ItemCreate, db: Session = Depends(get_db)):
     return new_item
 
 @router.put("/{item_id}", status_code=status.HTTP_200_OK)
-def update_item_data(item_id: int, updated_data: ItemUpdate, db: Session = Depends(get_db)) -> Item:
+def update_item_data(item_id: int, updated_data: ItemUpdate, db: Session = Depends(get_db)) -> Item | None:
     try:
         item = update_item(db, item_id, updated_data)
     except SQLAlchemyError as e:

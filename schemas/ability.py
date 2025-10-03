@@ -21,6 +21,5 @@ class AbilityResponse(BaseModel):
     ability_key: Optional[str] = None
     ability_slot: Optional[int] = None
 
-    model_config = {
-        "from_attributes": True
-    }
+    class Config:
+        orm_mode = True

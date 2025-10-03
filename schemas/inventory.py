@@ -17,9 +17,8 @@ class InventoryItemResponse(BaseModel):
     slot_id: int
     item_id: int
 
-    model_config = {
-        "from_attributes": True
-    }
+    class Config:
+        orm_mode = True
 
 class InventoryResponse(BaseModel):
     items: list[InventoryItemResponse]
@@ -29,17 +28,15 @@ class ItemDetails(BaseModel):
     item_name: str
     item_type: ItemType
 
-    model_config = {
-        "from_attributes": True
-    }
+    class Config:
+        orm_mode = True
     
 class InventoryItemWithDetails(BaseModel):
     slot_id: int
     item: ItemDetails
 
-    model_config = {
-        "from_attributes": True
-    }
+    class Config:
+        orm_mode = True
 
 class InventoryWithDetailsResponse(BaseModel):
     items: list[InventoryItemWithDetails]
@@ -48,9 +45,8 @@ class InventoryItemWithDetailsAndStats(BaseModel):
     slot_id: int
     item: ItemDetailsWithCommonAttr
 
-    model_config = {
-        "from_attributes": True
-    }
+    class Config:
+        orm_mode = True
 
 class InventoryWithDetailsAndStatsResponse(BaseModel):
     items: list[InventoryItemWithDetailsAndStats]

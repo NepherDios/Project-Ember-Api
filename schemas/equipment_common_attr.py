@@ -24,6 +24,5 @@ class EquipmentCommonAttrResponse(BaseModel):
     equipment_tier: int
     equipped: bool
     
-    model_config = {
-        "from_attributes": True
-    }
+    class Config:
+        orm_mode = True
