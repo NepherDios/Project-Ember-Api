@@ -1,6 +1,6 @@
 import enum
 
-class RarityType(enum.Enum):
+class RarityType(str, enum.Enum):
     COMMON = "Common"
     MAGIC = "Magic"
     RARE = "Rare"

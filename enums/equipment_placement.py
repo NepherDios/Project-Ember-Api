@@ -1,6 +1,6 @@
 import enum
 
-class EquipmentPlacement(enum.Enum):
+class EquipmentPlacement(str, enum.Enum):
     WEAPON_MAIN = "WeaponMain"
     WEAPON_OFF_HAND = "WeaponOffHand"
     ACCESSORY = "Accessory"

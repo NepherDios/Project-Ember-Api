@@ -1,6 +1,6 @@
 import enum
 
-class RollType(enum.Enum):
+class RollType(str, enum.Enum):
     STRENGTH = "Strength"
     DEXTERITY = "Dexterity"
     INTELLIGENCE = "Intelligence"

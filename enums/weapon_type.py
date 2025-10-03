@@ -1,6 +1,6 @@
 import enum
 
-class WeaponType(enum.Enum):
+class WeaponType(str, enum.Enum):
     AXE = "Axe"
     TWO_HANDED_AXE = "TwoHandedAxe"
     MACE = "Mace"

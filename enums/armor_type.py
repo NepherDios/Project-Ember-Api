@@ -1,6 +1,6 @@
 import enum
 
-class ArmorType(enum.Enum):
+class ArmorType(str, enum.Enum):
     HEAHY_HELMET = "HeavyHelmet"
     HEAVY_BODY_ARMOR = "HeavyBodyArmor"
     HEAVY_LEG_ARMOR = "HeavyLegArmor"

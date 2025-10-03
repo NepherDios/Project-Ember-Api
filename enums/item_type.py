@@ -1,6 +1,6 @@
 import enum
 
-class ItemType(enum.Enum):
+class ItemType(str, enum.Enum):
     GENERAL_ITEM = "GeneralItem"
     WEAPON = "Weapon"
     ARMOR = "Armor"

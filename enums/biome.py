@@ -1,5 +1,5 @@
 import enum
 
-class Biome(enum.Enum):
+class Biome(str, enum.Enum):
     FOREST = "Forest"
     CRYPT = "Crypt"

@@ -1,6 +1,6 @@
 import enum
 
-class DmgType(enum.Enum):
+class DmgType(str, enum.Enum):
     FIRE = "Fire"
     WATER = "Water"
     AIR = "Air"
