@@ -17,6 +17,8 @@ from routers import (
     quest_router,
     roll_stat_router,
     weapon_router,
+    save_router,
+    skill_tree_router,
 )
 
 # Initialize app
@@ -37,6 +39,8 @@ app.include_router(quest_progress_router.router)
 app.include_router(quest_router.router)
 app.include_router(roll_stat_router.router)
 app.include_router(weapon_router.router)
+app.include_router(save_router.router)
+app.include_router(skill_tree_router.router)
 
 app.add_middleware(
     CORSMiddleware,
