@@ -14,7 +14,6 @@ class Player(Base):
     current_xp = Column(Integer, nullable=False)
     gold = Column(Integer, nullable=False)
     souls = Column(Integer, nullable=False)
-    skill_tree_id = Column(Integer, ForeignKey('SkillTree.skill_tree_id'))
     
     inventory = relationship('Inventory', back_populates='player', cascade="all, delete-orphan")
     ability = relationship('Ability', back_populates='player', cascade="all, delete-orphan")
