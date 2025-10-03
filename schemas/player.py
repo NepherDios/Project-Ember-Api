@@ -29,6 +29,3 @@ class PlayerResponse(BaseModel):
     
     class Config:
         orm_mode = True 
-    
-class PlayersListResponse(BaseModel):
-    players_list: list[PlayerResponse]

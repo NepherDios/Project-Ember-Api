@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from database import get_db
-from schemas.player import PlayerCreate, PlayerUpdate, PlayerResponse, PlayersListResponse
+from schemas.player import PlayerCreate, PlayerUpdate, PlayerResponse
 from crud.player import (
     create_player,
     update_player,
@@ -47,7 +47,7 @@ def read_player(player_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Player not found")
     return player
 
-@router.get("/", status_code=status.HTTP_200_OK, response_model=PlayersListResponse)
+@router.get("/", status_code=status.HTTP_200_OK, response_model=list[PlayerResponse])
 def read_all_players(db: Session = Depends(get_db)):
     try:
         players = get_all_players(db)
